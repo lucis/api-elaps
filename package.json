@@ -1,0 +1,24 @@
+{
+  "name": "api-elaps",
+  "version": "0.0.0",
+  "description": "Api do Sistema E-Laps",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "yarn install",
+    "start": "nodemon app.js"
+  },
+  "author": "Luciano Júnior",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "fast-json-patch": "^2.0.5",
+    "jsonwebtoken": "^8.0.1",
+    "lodash": "^4.17.4",
+    "lucis-api-query": "0.0.1",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.12"
+  }
+}
