@@ -3,13 +3,18 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 moment.locale('pt-br');
 
+mongoose.Promise = global.Promise;
+
 global.SECRET = 'GabrielCampos';
 
 const ioMiddleware = require('./middlewares/ioMiddleware');
 const routerMiddleware = require('./middlewares/routerMiddleware');
 
+
 const app = express();
 
+ioMiddleware.set(app);
+routerMiddleware.set(app);
 
 let url;
 if (process.env.VILAR_MONGO_URL && process.env.VILAR_DATABASE){
@@ -19,9 +24,6 @@ if (process.env.VILAR_MONGO_URL && process.env.VILAR_DATABASE){
 }
 
 mongoose.connect(url);
-
-ioMiddleware.set(app);
-routerMiddleware.set(app);
 
 const porta = process.env.API_VILAR_DEMOLAY_PORT || 5002;
 app.listen(porta, ()=>{

@@ -1,9 +1,7 @@
 const express = require('express');
-const eventosRouter = require('./eventosRouter');
-const filiacoesRouter = require('./filiacoesRouter');
+const clientesRouter = require('./clientesRouter');
 const apiRouter = express.Router();
 
-apiRouter.use('/eventos', eventosRouter);
-apiRouter.use('/filiacoes', filiacoesRouter);
+apiRouter.use('/clientes', clientesRouter);
 
 module.exports = apiRouter;

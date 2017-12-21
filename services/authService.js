@@ -1,5 +1,4 @@
 const Usuario = require('../models/Usuario');
-const FiliacaoDeMolay = require('../models/FiliacaoDeMolay');
 const errosUtil = require('../util/errosUtil');
 const constantes = require('../util/constantes');
 const jwt = require('jsonwebtoken');
@@ -33,20 +32,20 @@ authService.login = function login(loginData, res){
             }
             const { cliente } = usuarioBD;
             // TODO => Mexer aqui quando o usuário poder acessar outra filiação (ex: priorado)
-            const queryFiliacao = FiliacaoDeMolay.findOne({cliente}).select('_id').lean();
-            queryFiliacao.exec((err, filiacao)=>{
-                if (err){
-                    return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar logar', err, res);
-                }
-                const jwtPayload = {filiacaoId: filiacao._id, idDemolay};
+            // const queryFiliacao = FiliacaoDeMolay.findOne({cliente}).select('_id').lean();
+            // queryFiliacao.exec((err, filiacao)=>{
+            //     if (err){
+            //         return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar logar', err, res);
+            //     }
+            //     const jwtPayload = {filiacaoId: filiacao._id, idDemolay};
                 
-                jwt.sign(jwtPayload, SECRET, {algorithm: constantes.HS256}, function(err, token){
-                    if (err){
-                        return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar logar', err, res);
-                    }
-                    return res.status(constantes.OK).json({token}).end();
-                });
-            });
+            //     jwt.sign(jwtPayload, SECRET, {algorithm: constantes.HS256}, function(err, token){
+            //         if (err){
+            //             return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar logar', err, res);
+            //         }
+            //         return res.status(constantes.OK).json({token}).end();
+            //     });
+            // });
         });
     });
 };

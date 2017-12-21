@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 const constantes = require('./helpers/constantes');
 const helper = require('./helpers/helper');
 
+const { pluginMongoose } = require('lucis-api-query');
+
 const clienteSchema = new Schema({
     nome: helper.criaStringReq('Você deve informar um nome'),
     dNasc: Date,
@@ -25,5 +27,6 @@ const clienteSchema = new Schema({
 });
 
 // Aplicar API de paginação!
+clienteSchema.plugin(pluginMongoose);
 
 module.exports = mongoose.model('Cliente', clienteSchema);
