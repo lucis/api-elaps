@@ -10,7 +10,7 @@ clientesRouter.get('/', Cliente.lucisApiQuery());
 
 // TODO; middlewareValidaPermissao
 clientesRouter.get('/:clienteId', (req, res)=>{
-    return clientesService.recuperarCliente(req.params, res);
+    return clientesService.recuperarCliente(req.params.clienteId, res);
 });
 
 // TODO; middlewareValidaPermissao

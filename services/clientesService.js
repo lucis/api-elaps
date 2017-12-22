@@ -28,7 +28,7 @@ clientesService.criarCliente = (novoCliente, response)=>{
  * Recupera os dados de uma Cliente específica
  */
 clientesService.recuperarCliente = (clienteId, response)=>{
-    Cliente.findById(clienteId, (erro, cliente)=>{
+    Cliente.findById(clienteId, (err, cliente)=>{
         if (err){
             return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar criar o cliente', err, response);
         }
@@ -37,15 +37,18 @@ clientesService.recuperarCliente = (clienteId, response)=>{
 };
 
 /**
- * @deprecated agora utilizamos direto no router o apiQuery
- * Recupera uma lista de Clientes
+ * Utiliza lucis-api-query 
+ * 
+ * @param {*String} clienteId 
+ * @param {*} patches 
+ * @param {*} response 
  */
 clientesService.editarCliente = (clienteId, patches, response)=>{
-    Cliente.findOneAndPatch(clienteId, patches, (err, patched)=>{
+    Cliente.findByIdAndPatch(clienteId, patches, (err, patched)=>{
         if (err){
-            return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar alterar o cliente', err, response);
+            return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, err.message || 'Houve um erro ao tentar alterar o cliente', err, response);
         }
-        return response.json(cliente);
+        return response.json(patched);
     });
 };
 
