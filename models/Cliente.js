@@ -19,11 +19,11 @@ const clienteSchema = new Schema({
     rg: String,
     email: String,
     telefone: {
-        celular: String,
-        fixo: String,
-        comercial: String
+        principal: String,
+        alternativo: String
     },
-    referencia: String
+    referencia: String,
+    avatar: String
 });
 
 // Aplicar API de paginação!
