@@ -11,10 +11,13 @@
   "author": "Luciano Júnior",
   "license": "ISC",
   "dependencies": {
+    "apollo-server": "^2.0.0-beta.1",
+    "apollo-server-express": "^2.0.0-beta.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "fast-json-patch": "^2.0.5",
+    "graphql": "^0.13.2",
     "jsonwebtoken": "^8.0.1",
     "lodash": "^4.17.4",
     "lucis-api-query": "^0.6.5",

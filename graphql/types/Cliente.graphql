@@ -1,0 +1,27 @@
+type Cliente {
+    id: Id
+    nome: String
+    dataDeNascimento: String
+    endereco: Endereco
+    cpf: String
+    rg: String
+    email: String
+    telefones: Telefones
+    referencia: String
+    avatar: String
+}
+
+type Telefones {
+    principal: String
+    alternativo: String
+}
+
+type Endereco {
+    rua: String
+    n: String
+    cep: String
+    cidade: String
+    uf: String
+    bairro: String
+    complemento: String
+}
