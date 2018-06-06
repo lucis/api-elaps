@@ -22,8 +22,7 @@ const clienteSchema = new Schema({
         principal: String,
         alternativo: String
     },
-    referencia: String,
-    avatar: String
+    referencia: String
 });
 
 // Aplicar API de paginação!
