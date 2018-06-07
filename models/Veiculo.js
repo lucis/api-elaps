@@ -17,6 +17,11 @@ const veiculoSchema = new Schema({
         ref: 'Cliente',
         required: [true, 'Você deve informar o dono do carro']
     },
+    historicoDonos: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Cliente',
+            required: [true, 'Você deve informar o dono do carro']
+    }],
     dataDeCadastro: {
         type: Date,
         default: Date.now
