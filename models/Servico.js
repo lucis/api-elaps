@@ -20,7 +20,15 @@ const servicoSchema = new Schema({
         required: [true, 'Você deve informar o Veículo']
     },
     kilometragem: Number,
-    items: []
+    items: [{
+        pecaId: { type: Schema.Types.ObjectId, ref: 'Peca'},
+        descricao: helper.criaStringReq('Você deve informar a descrição do Item'),
+        unidade: String,
+        qtd: Number,
+        pUnitario: Number,
+        total: {type: Number, required: [true, 'Você deve informar o Preço']}
+    }],
+    obs: String
 });
 
 module.exports = mongoose.model('Servico', servicoSchema);
