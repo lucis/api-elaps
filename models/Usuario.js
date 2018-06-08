@@ -6,7 +6,7 @@ const constantes = require('./helpers/constantes');
 const helper = require('./helpers/helper');
 
 const usuarioSchema = new Schema({
-    _id: helper.criaStringReq('Você deve informar o nome de usuário', true),
+    _id: String,
     senha: helper.criaStringReq('Você deve informar uma senha'),
     perfil: {
         nome: helper.criaStringReq('Você deve informar o nome'),
