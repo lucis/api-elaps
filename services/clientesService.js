@@ -6,34 +6,24 @@ const clientesService = {};
 /**
  * Cria uma nova Cliente no sistema
  */
-clientesService.criarCliente = (novoCliente, response)=>{
+clientesService.criarCliente = (novoCliente)=>{
     const cliente = new Cliente(novoCliente);
-    
+
     const validacao = cliente.validateSync();
 
     if (validacao){
         const erro = Object.values(validacao.errors)[0];
-        return errosUtil.erroRest(constantes.BAD_REQUEST, erro.message, erro, response);
+        return Promise.reject(erro.message);
     }
 
-    cliente.save((err, saved)=>{
-        if (err){
-            return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar criar o cliente', err, response);
-        }
-        return response.status(constantes.CREATED).json(saved);
-    });
+    return cliente.save();
 };
 
 /**
  * Recupera os dados de uma Cliente específica
  */
 clientesService.recuperarCliente = (clienteId, response)=>{
-    Cliente.findById(clienteId, (err, cliente)=>{
-        if (err){
-            return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar criar o cliente', err, response);
-        }
-        return response.json(cliente);
-    });
+    return Cliente.findById(clienteId);
 };
 
 /**

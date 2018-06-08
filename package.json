@@ -13,7 +13,7 @@
   "dependencies": {
     "apollo-server": "^2.0.0-beta.1",
     "apollo-server-express": "^2.0.0-beta.0",
-    "bcrypt": "^1.0.3",
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "fast-json-patch": "^2.0.5",
@@ -21,7 +21,7 @@
     "graphql-import": "^0.6.0",
     "graphql-tag": "^2.9.2",
     "jsonwebtoken": "^8.0.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.10",
     "lucis-api-query": "^0.6.5",
     "moment": "^2.18.1",
     "mongoose": "^4.11.12"
