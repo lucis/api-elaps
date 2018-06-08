@@ -22,7 +22,7 @@ clientesService.criarCliente = (novoCliente)=>{
 /**
  * Recupera os dados de uma Cliente específica
  */
-clientesService.recuperarCliente = (clienteId, response)=>{
+clientesService.recuperarCliente = (clienteId)=>{
     return Cliente.findById(clienteId);
 };
 

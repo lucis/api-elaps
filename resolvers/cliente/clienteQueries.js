@@ -1,8 +1,8 @@
 const clientesService = require('./../../services/clientesService');
 
 module.exports = {
-    cliente: (_, args, context) => {
-        return {nome: 'Luciano'};
+    cliente: (_, {id}, context) => {
+        return clientesService.recuperarCliente(id);
     },
     clientes: (_, args, context) => {
         
