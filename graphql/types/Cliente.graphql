@@ -1,5 +1,5 @@
 type Cliente {
-    id: Id
+    id: String
     nome: String
     dataDeNascimento: String
     endereco: Endereco
@@ -24,4 +24,23 @@ type Endereco {
     uf: String
     bairro: String
     complemento: String
+}
+
+input ClienteInput {
+    nome: String
+    dataDeNascimento: String
+    cpf: String
+    rg: String
+    email: String
+    referencia: String
+    avatar: String
+    rua: String
+    n: String
+    cep: String
+    cidade: String
+    uf: String
+    bairro: String
+    complemento: String
+    telefonePrincipal: String
+    telefoneAlternativo: String
 }

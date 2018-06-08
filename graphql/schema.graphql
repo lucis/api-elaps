@@ -1,5 +1,7 @@
+# import Cliente from "types/Cliente.graphql"
+
 type Query {
-  cliente(id: Id): Cliente
+  cliente(id: String!): Cliente
   clientes(
     query: String = "",
     orderBy: String = "OrderByPriceDESC",
@@ -9,6 +11,5 @@ type Query {
 }
 
 type Mutation {
-  # Aparentemente há de ser criado um tipo ClienteInput para isso, depois testo se pode funcionar com cliente
-  addCliente(): Cliente
+  addCliente(fields: ClienteInput): Cliente
 }
