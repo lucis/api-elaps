@@ -9,18 +9,19 @@ global.SECRET = 'GabrielCampos';
 
 const ioMiddleware = require('./middlewares/ioMiddleware');
 const routerMiddleware = require('./middlewares/routerMiddleware');
-
+const graphqlMiddleware = require('./middlewares/graphqlMiddleware');
 
 const app = express();
 
 ioMiddleware.set(app);
 routerMiddleware.set(app);
+graphqlMiddleware.set(app);
 
 let url;
 if (process.env.VILAR_MONGO_URL && process.env.VILAR_DATABASE){
     url = process.env.VILAR_MONGO_URL + process.env.VILAR_DATABASE;
 }else{
-    url = 'mongodb://127.0.0.1/vilar-demolay'
+    url = 'mongodb://127.0.0.1/elaps'
 }
 
 mongoose.connect(url);

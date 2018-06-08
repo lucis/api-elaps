@@ -1,13 +1,26 @@
 const graphqlMiddleware = {};
 
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer, gql } = require('apollo-server');
 const { registerServer } = require('apollo-server-express');
-const { typeDefs } = require('./../schema');
+
+const typeDefs = gql`
+  type Query {
+    "A simple type for getting started!"
+    hello: String
+  }
+`;
+
+const resolvers = {
+  Query: {
+    hello: () => 'world'
+  }
+};
 
 // TODO: Conseguir ler os tipos dos arquivos
 // TODO: Ler os resolvers de algum canto
 const server = new ApolloServer({
-  typeDefs
+  typeDefs,
+  resolvers
 });
 
 /**
