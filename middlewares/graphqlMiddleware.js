@@ -1,12 +1,9 @@
 const { importSchema } = require('graphql-import');
-const resolvers = require('./../resolvers');
-
-const graphqlMiddleware = {};
-
 const { ApolloServer, gql } = require('apollo-server');
 const { registerServer } = require('apollo-server-express');
 
 const typeDefs = gql(importSchema('./graphql/schema.graphql'));
+const resolvers = require('./../resolvers');
 
 const server = new ApolloServer({
   typeDefs,
@@ -16,6 +13,4 @@ const server = new ApolloServer({
 /**
  * Configura o middleware para adicionar um servidor GraphQL
  */
-graphqlMiddleware.set = (app) => registerServer({ server, app });
-
-module.exports = graphqlMiddleware;
+module.exports = { set: (app) => registerServer({ server, app }) };
