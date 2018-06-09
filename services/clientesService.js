@@ -4,6 +4,14 @@ const Cliente = require('../models/Cliente');
 const clientesService = {};
 
 /**
+ * Faz a busca de clientes na base de dados, 
+ * com filtros, ordenamento, e paginação
+ */
+clientesService.buscarClientes = ({ query, orderBy, limit, page}) => {
+    return Cliente.lucisApiQuery({ query, orderBy, limit, page});
+};
+
+/**
  * Cria uma nova Cliente no sistema
  */
 clientesService.criarCliente = (novoCliente)=>{
