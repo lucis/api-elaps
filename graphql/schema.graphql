@@ -5,15 +5,15 @@ type QueryInput {
   query: String
   # orderBy: deve ser da forma "+name,-lastName...", com o + indicando crescente e o - indicando descrescente
   orderBy: String
-  limit: Number
-  page: Number
+  # limit: indica o tamanho de cada página (quantidade de elementos)
+  limit: Int
+  # page: indica a página requisitada
+  page: Int
 }
 
 type Clientes {
   entities: [Cliente]
-  total: Number
-  page: Number
-  limit: Number
+  metadata: QueryInput
 }
 
 type Query {

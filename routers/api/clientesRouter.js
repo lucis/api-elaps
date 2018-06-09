@@ -5,8 +5,6 @@ const Cliente = require('../../models/Cliente');
 
 const clientesRouter = express.Router({mergeParams: true});
 
-// TODO; middlewareValidaPermissao
-clientesRouter.get('/', Cliente.lucisApiQuery());
 
 // TODO; middlewareValidaPermissao
 clientesRouter.get('/:clienteId', (req, res)=>{
