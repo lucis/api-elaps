@@ -4,7 +4,15 @@ module.exports = {
     cliente: (_, {id}, context) => {
         return clientesService.recuperarCliente(id);
     },
-    clientes: (_, args, context) => {
-        
+    clientes: (_, { data } , context) => {
+        return clientesService.buscarClientes(data).then((clientes) => {
+            return { 
+                entities: clientes.docs,
+                metadata: {
+                    ...data,
+                    ...clientes,
+                }
+             };
+        });
     }
 };

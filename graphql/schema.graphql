@@ -20,6 +20,8 @@ type QueryMetadata {
   limit: Int
   # page: indica a página requisitada
   page: Int
+  # total: indica o total de elementos
+  total: Int
 }
 
 type Clientes {
