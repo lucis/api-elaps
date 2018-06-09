@@ -1,6 +1,17 @@
 # import Cliente from "types/Cliente.graphql"
 
-type QueryInput {
+input QueryInput {
+  # query: deve ser na forma "name=Lucia&lastName=Oliv&endereco.rua=Jose". Detalhes em lucis-api-query
+  query: String
+  # orderBy: deve ser da forma "+name,-lastName...", com o + indicando crescente e o - indicando descrescente
+  orderBy: String
+  # limit: indica o tamanho de cada página (quantidade de elementos)
+  limit: Int
+  # page: indica a página requisitada
+  page: Int
+}
+
+type QueryMetadata {
   # query: deve ser na forma "name=Lucia&lastName=Oliv&endereco.rua=Jose". Detalhes em lucis-api-query
   query: String
   # orderBy: deve ser da forma "+name,-lastName...", com o + indicando crescente e o - indicando descrescente
@@ -13,7 +24,7 @@ type QueryInput {
 
 type Clientes {
   entities: [Cliente]
-  metadata: QueryInput
+  metadata: QueryMetadata
 }
 
 type Query {
