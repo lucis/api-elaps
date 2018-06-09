@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { pluginMongoose } = require('lucis-api-query');
 const Schema = mongoose.Schema;
 
 const helper = require('./helpers/helper');
@@ -21,5 +22,6 @@ const pecaSchema = new Schema({
     }
 });
 
+pecaSchema.plugin(pluginMongoose);
 
 module.exports = mongoose.model('Peca', pecaSchema);

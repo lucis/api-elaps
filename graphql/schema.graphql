@@ -1,7 +1,9 @@
 # import Cliente from "types/Cliente.graphql"
 
 type QueryInput {
+  # query: deve ser na forma "name=Lucia&lastName=Oliv&endereco.rua=Jose". Detalhes em lucis-api-query
   query: String
+  # orderBy: deve ser da forma "+name,-lastName...", com o + indicando crescente e o - indicando descrescente
   orderBy: String
   limit: Number
   page: Number
