@@ -26,14 +26,12 @@ type Endereco {
     complemento: String
 }
 
-input ClienteInput {
-    nome: String
-    dataDeNascimento: String
-    cpf: String
-    rg: String
-    email: String
-    referencia: String
-    avatar: String
+input TelefonesInput {
+    principal: String
+    alternativo: String
+}
+
+input EnderecoInput {
     rua: String
     n: String
     cep: String
@@ -41,6 +39,16 @@ input ClienteInput {
     uf: String
     bairro: String
     complemento: String
-    telefonePrincipal: String
-    telefoneAlternativo: String
+}
+
+input ClienteInput {
+    nome: String
+    dataDeNascimento: String
+    endereco: Endereco
+    cpf: String
+    rg: String
+    email: String
+    telefones: Telefones
+    referencia: String
+    avatar: String
 }
