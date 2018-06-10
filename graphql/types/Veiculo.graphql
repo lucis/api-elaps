@@ -1,4 +1,5 @@
 # import Cliente from "Cliente.graphql"
+# import Servico from "Servico.graphql"
 
 type Veiculo {
     id: String
@@ -13,6 +14,7 @@ type Veiculo {
     dono: Cliente
     historicoDonos: [Cliente]
     dataDeCadastro: Int
+    servicos: Servico
 }
 
 input VeiculoInput {

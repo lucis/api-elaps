@@ -1,4 +1,5 @@
 # import Veiculo from "Veiculo.graphql"
+# import Servico from "Servico.graphql"
 
 type Cliente {
     id: String
@@ -12,6 +13,7 @@ type Cliente {
     referencia: String
     avatar: String
     veiculos: [Veiculo]
+    servicos: [Servico]
 }
 
 type Telefones {
