@@ -5,11 +5,11 @@
 input ServicoInput {
     clienteId: String!
     veiculoId: String!
-    kilometragem: Number
+    kilometragem: Int
     dataFinalizacao: Int
     obs: String
     items: [ItemInput]!
-    total: Number
+    total: Int
 }
 
 type Item {
@@ -17,18 +17,19 @@ type Item {
     referencia: String
     descricao: String!
     unidade: String
-    qtd: Number
-    pUnitario: Number
-    total: Number!
+    qtd: Int
+    pUnitario: Int
+    total: Int!
 }
 
-input ServicoInput {
-    clienteId: String!
-    veiculoId: String!
-    kilometragem: Number
+type Servico {
+    id: String!
+    cliente: Cliente!
+    veiculo: Veiculo!
+    kilometragem: Int
     dataFinalizacao: Int
     obs: String
-    items: [ItemInput]!
+    items: [Item]!
 }
 
 # Preços são sempre representados em centavos
@@ -39,7 +40,7 @@ input ItemInput {
     referencia: String,
     descricao: String!
     unidade: String
-    qtd: Number
-    pUnitario: Number
-    total: Number!
+    qtd: Int
+    pUnitario: Int
+    total: Int!
 }
