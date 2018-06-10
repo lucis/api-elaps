@@ -13,12 +13,12 @@ const veiculoSchema = new Schema({
     motor: String,
     cor: String,
     montadora: String,
-    dono: {
+    donoId: {
         type: Schema.Types.ObjectId,
         ref: 'Cliente',
         required: [true, 'Você deve informar o dono do carro']
     },
-    historicoDonos: [{
+    historicoDonosIds: [{
             type: Schema.Types.ObjectId,
             ref: 'Cliente',
             required: [true, 'Você deve informar o dono do carro']

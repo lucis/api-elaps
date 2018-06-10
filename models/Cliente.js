@@ -13,7 +13,8 @@ const clienteSchema = new Schema({
     imgUrl: String,
     cpf: {
         type: String,
-        match: /[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/
+        match: /[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/,
+        unique: true
     },
     rg: String,
     email: String,

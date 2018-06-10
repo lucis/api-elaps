@@ -27,7 +27,8 @@ if (process.env.E_LAPS_MONGO_URL && process.env.E_LAPS_DATABASE){
 
 mongoose.connect(url);
 
-const porta = process.env.API_E_LAPS_DEMOLAY_PORT || 5002;
+const porta = process.env.API_E_LAPS_PORT || 5002;
+
 app.listen(porta, ()=>{
     console.log('Servidor escutando na porta ' + porta + ' - Data: ' + moment().format('DD/MM/YYYY HH:MM:SS'));
 });

@@ -1,0 +1,26 @@
+type Veiculo {
+    id: String
+    placa: String!
+    uf: String
+    modelo: String
+    ano: String
+    cidade: String
+    motor: String
+    cor: String
+    montadora: String
+    dono: Cliente
+    historicoDonos: [Cliente]
+    dataDeCadastro: Int
+}
+
+input VeiculoInput {
+    placa: String!
+    uf: String
+    modelo: String
+    ano: String
+    cidade: String
+    motor: String
+    cor: String
+    montadora: String
+    donoId: String
+}

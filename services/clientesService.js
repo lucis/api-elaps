@@ -1,5 +1,3 @@
-const errosUtil = require('../util/errosUtil');
-const constantes = require('../util/constantes');
 const Cliente = require('../models/Cliente');
 const clientesService = {};
 
@@ -35,19 +33,14 @@ clientesService.recuperarCliente = (clienteId)=>{
 };
 
 /**
- * Utiliza lucis-api-query 
+ * Atualiza os dados de um Cliente na base de dados
  * 
  * @param {*String} clienteId 
- * @param {*} patches 
- * @param {*} response 
+ * @param {Cliente} novoCliente 
+ * @returns {Promise} contendo o cliente atualizado
  */
-clientesService.editarCliente = (clienteId, patches, response)=>{
-    Cliente.findByIdAndPatch(clienteId, patches, (err, patched)=>{
-        if (err){
-            return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, err.message || 'Houve um erro ao tentar alterar o cliente', err, response);
-        }
-        return response.json(patched);
-    });
+clientesService.editarCliente = (clienteId, novoCliente)=>{
+    return Cliente.findByIdAndUpdate(clienteId, novoCliente);
 };
 
 module.exports = clientesService;
