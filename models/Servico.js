@@ -23,6 +23,7 @@ const servicoSchema = new Schema({
     kilometragem: Number,
     items: [{
         pecaId: { type: Schema.Types.ObjectId, ref: 'Peca'},
+        referencia: String,
         descricao: helper.criaStringReq('Você deve informar a descrição do Item'),
         unidade: String,
         qtd: Number,

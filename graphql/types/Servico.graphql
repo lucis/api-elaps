@@ -1,0 +1,45 @@
+# import Veiculo from "Veiculo.graphql"
+# import Cliente from "Cliente.graphql"
+# import Peca from "Peca.graphql"
+
+input ServicoInput {
+    clienteId: String!
+    veiculoId: String!
+    kilometragem: Number
+    dataFinalizacao: Int
+    obs: String
+    items: [ItemInput]!
+    total: Number
+}
+
+type Item {
+    pecaId: String
+    referencia: String
+    descricao: String!
+    unidade: String
+    qtd: Number
+    pUnitario: Number
+    total: Number!
+}
+
+input ServicoInput {
+    clienteId: String!
+    veiculoId: String!
+    kilometragem: Number
+    dataFinalizacao: Int
+    obs: String
+    items: [ItemInput]!
+}
+
+# Preços são sempre representados em centavos
+#
+# ex: R$ 100,00 => 10000
+input ItemInput {
+    pecaId: String
+    referencia: String,
+    descricao: String!
+    unidade: String
+    qtd: Number
+    pUnitario: Number
+    total: Number!
+}
