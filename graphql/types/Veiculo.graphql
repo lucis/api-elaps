@@ -22,5 +22,5 @@ input VeiculoInput {
     motor: String
     cor: String
     montadora: String
-    donoId: String
+    donoId: String!
 }
