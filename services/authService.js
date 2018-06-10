@@ -2,7 +2,6 @@ const Usuario = require('../models/Usuario');
 const errosUtil = require('../util/errosUtil');
 const constantes = require('../util/constantes');
 const jwt = require('jsonwebtoken');
-const async = require('async');
 const SECRET = global.SECRET;
 
 const authService = {};
@@ -10,12 +9,12 @@ const authService = {};
 /**
  * Método que realiza login na aplicação, utilizando padrão JWT
  * 
- * @param {Object} loginData - objeto com idDemolay e senha do usuário
+ * @param {Object} loginData - objeto com login e senha do usuário
  * @param {Object} res - encapsula response
  */
 authService.login = function login(loginData, res){
-    const {idDemolay, senha} = loginData;
-    const query = Usuario.findOne({idDemolay}).lean();
+    const { login, senha } = loginData;
+    const query = Usuario.findById(login).lean();
     query.exec((err, usuarioBD) => {
         if (err){
             return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar logar', err, res);
@@ -30,22 +29,13 @@ authService.login = function login(loginData, res){
             if (!isMatch){
                 return errosUtil.erroRest(constantes.BAD_REQUEST, 'Usuário ou senha incorretos', res);
             }
-            const { cliente } = usuarioBD;
-            // TODO => Mexer aqui quando o usuário poder acessar outra filiação (ex: priorado)
-            // const queryFiliacao = FiliacaoDeMolay.findOne({cliente}).select('_id').lean();
-            // queryFiliacao.exec((err, filiacao)=>{
-            //     if (err){
-            //         return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar logar', err, res);
-            //     }
-            //     const jwtPayload = {filiacaoId: filiacao._id, idDemolay};
-                
-            //     jwt.sign(jwtPayload, SECRET, {algorithm: constantes.HS256}, function(err, token){
-            //         if (err){
-            //             return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar logar', err, res);
-            //         }
-            //         return res.status(constantes.OK).json({token}).end();
-            //     });
-            // });
+            const { _id, perfil } = usuarioBD;
+            jwt.sign({ login: _id, perfil}, SECRET, {algorithm: constantes.HS256}, (err, token) => {
+                if (err){
+                    return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar logar', err, res);
+                }
+                return res.status(constantes.OK).json({token}).end();
+            });
         });
     });
 };
@@ -54,7 +44,7 @@ authService.login = function login(loginData, res){
  * Método que cria um usuário na base do sistema, após uma cliente ter sido criada para ser asssociada
  * 
  * modelo de usuarioData: {
- *  idDemolay: '25168', 
+ *  login: '25168', 
  *  senha: 'magnificos',
  *  cliente: Ref ObjectId
  * }
@@ -83,42 +73,11 @@ authService.criarUsuario = function criarUsuario(usuarioData, res){
  * Cria middleware que verifica permissão de tal ação. 
  * 
  */
-authService.middlewareValidaPermissao = function middlewareValidaPermissao(tipo, payload){
+authService.middlewareValidaPermissao = function middlewareValidaPermissao (tipo, payload){
     return (req, res, next) => {
-        const {filiacaoId} = req.usuario;
-        const query = FiliacaoDeMolay.findById(filiacaoId).lean();
-        query.exec((err, filiacao)=>{
-            if (err){
-                return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao recuperar os dados', err, res);
-            }
-            if (!filiacao){
-                return errosUtil.erroRest(constantes.UNAUTHORIZED, 'A filiação não existe.', res);
-            }
-
-            let acessoNegado;
-            // Supoe se que os campos ref não vem populados, mas sim com ID
-            switch (tipo) {
-                case CRIAR_USUARIO:
-                    acessoNegado = ['mc'].includes(filiacao.cargo)
-                    break;
-                case CRIAR_EVENTO:
-                    acessoNegado = ['mc'].includes(filiacao.cargo) && req.body.unidade == filiacao.unidade;
-                    break;
-                default:
-                    break;
-            }
-
-            if (acessoNegado){
-                return errosUtil.erroRest(constantes.FORBIDDEN, 'Você não tem permissão para esta ação', res);
-            }else{
-                return next();
-            }
-
-        });
+        // Por enquando, todo mundo pode tudo
+        next();
     };
 };
-
-authService.CRIAR_USUARIO = 'CRIAR_USUARIO';
-authService.CRIAR_EVENTO = 'CRIAR_EVENTO';
 
 module.exports = authService;

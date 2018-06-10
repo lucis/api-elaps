@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
-const constantes = require('./helpers/constantes');
 const helper = require('./helpers/helper');
 
 const usuarioSchema = new Schema({
@@ -23,7 +22,7 @@ const usuarioSchema = new Schema({
     }
 });
 
-const Usuario = module.exports = mongoose.model('Usuario', usuarioSchema);
+module.exports = mongoose.model('Usuario', usuarioSchema);
 
 /**
  * Método utilizado no cadastro de um usuário, onde sua senha está bruta no objeto usuário.
