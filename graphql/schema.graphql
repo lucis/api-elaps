@@ -1,5 +1,6 @@
 # import Cliente from "types/Cliente.graphql"
 # import Veiculo from "types/Veiculo.graphql"
+# import Peca from "types/Peca.graphql"
 
 input QueryInput {
   # query: deve ser na forma "name=Lucia&lastName=Oliv&endereco.rua=Jose". Detalhes em lucis-api-query
@@ -35,11 +36,18 @@ type Veiculos {
   metadata: QueryMetadata
 }
 
+type Pecas {
+  entities: [Peca]
+  metadata: QueryMetadata
+}
+
 type Query {
   cliente(id: String!): Cliente
   clientes(data: QueryInput!): Clientes
   veiculo(id: String!): Veiculo
   veiculos(data: QueryInput!): Veiculos
+  peca(id: String!): Peca
+  pecas(data: QueryInput!): Pecas
 }
 
 type Mutation {
@@ -47,4 +55,6 @@ type Mutation {
   updateCliente(id: String!, fields: ClienteInput!): Cliente
   addVeiculo(fields: VeiculoInput!): Veiculo
   updateVeiculo(id: String!, fields: VeiculoInput!): Veiculo
+  addPeca(fields: PecaInput!): Peca
+  updatePeca(id: String!, fields: PecaInput!): Peca
 }

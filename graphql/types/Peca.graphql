@@ -1,0 +1,15 @@
+type Peca {
+    id: String!
+    referencia: String!
+    descricao: String!
+    preco: Int!
+    unidade: String!
+    ultimaMudancaPreco: Int
+}
+
+input PecaInput {
+    referencia: String!
+    descricao: String!
+    preco: Int!
+    unidade: String!
+}

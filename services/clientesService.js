@@ -29,7 +29,7 @@ clientesService.criarCliente = (novoCliente)=>{
  * Recupera os dados de uma Cliente específica
  */
 clientesService.recuperarCliente = (clienteId)=>{
-    return Cliente.findById(clienteId);
+    return Cliente.findById(clienteId).lean();
 };
 
 /**
@@ -40,7 +40,7 @@ clientesService.recuperarCliente = (clienteId)=>{
  * @returns {Promise} contendo o cliente atualizado
  */
 clientesService.editarCliente = (clienteId, novoCliente)=>{
-    return Cliente.findByIdAndUpdate(clienteId, novoCliente);
+    return Cliente.findByIdAndUpdate(clienteId, novoCliente).lean();
 };
 
 module.exports = clientesService;

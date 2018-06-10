@@ -1,3 +1,5 @@
+# import Cliente from "Cliente.graphql"
+
 type Veiculo {
     id: String
     placa: String!

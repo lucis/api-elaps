@@ -40,7 +40,29 @@ veiculosService.recuperarVeiculo = (veiculoId)=>{
  * @returns {Promise} contendo o veiculo atualizado
  */
 veiculosService.editarVeiculo = (veiculoId, novoVeiculo)=>{
-    return Veiculo.findByIdAndUpdate(veiculoId, novoVeiculo);
+    return Veiculo.findByIdAndUpdate(veiculoId, novoVeiculo).lean();
+};
+
+/**
+ * Popula donos de um veículo retorna a coleção
+ * 
+ * @param {String} veiculoId 
+ */
+veiculosService.recuperarHistoricoDonos = (veiculoId) => {
+    return Veiculo.findById(veiculoId)
+           .select('historicoDonosIds')
+           .populate('historicoDonosIds')
+           .lean()
+           .then((veiculo)=>veiculo.historicoDonosIds);
+};
+
+/**
+ * Recupera todos os veículos que pertencem à tal cliente
+ * 
+ * @param {String} donoId 
+ */
+veiculosService.recuperarVeiculosPorDono = (donoId) => {
+    return Veiculo.find({donoId}).lean();
 };
 
 module.exports = veiculosService;
