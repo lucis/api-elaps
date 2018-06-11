@@ -80,4 +80,23 @@ authService.middlewareValidaPermissao = function middlewareValidaPermissao (tipo
     };
 };
 
+/** 
+ * Middleware que verifica se há um usuário logado e válido realizando a requisição
+ * 
+ * (usado para o /graphql junto com Express)
+ */
+authService.middlewareAutenticacao = (req, res, next) => {
+    if (!req.headers.authorization){
+        return res.status(403).json({erro: 'Você não está autorizado'});
+    }
+    var authToken = req.headers.authorization.split(' ')[1];
+    jwt.verify(authToken, SECRET, function(err, decoded){
+        if (err) {
+            return res.status(403).json({erro: 'Você não está autorizado'});
+        }
+        req.usuario = decoded;
+        next();
+    });
+};
+
 module.exports = authService;
