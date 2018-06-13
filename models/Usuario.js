@@ -9,8 +9,9 @@ const usuarioSchema = new Schema({
     senha: helper.criaStringReq('Você deve informar uma senha'),
     perfil: {
         nome: helper.criaStringReq('Você deve informar o nome'),
+        login: String,
         imgUrl: String,
-        tipo: String
+        role: String
     },
     criadoEm: {
         type: Date,

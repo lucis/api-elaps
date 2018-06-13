@@ -1,3 +1,8 @@
+if (!process.env.NODE_ENV){
+    console.log('Variável de ambiente NODE_ENV não definida');
+    return process.exit();
+}
+
 const express = require('express');
 const mongoose = require('mongoose');
 const moment = require('moment');

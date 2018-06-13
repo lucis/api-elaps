@@ -46,26 +46,35 @@ authService.login = function login(loginData, res){
  * modelo de usuarioData: {
  *  login: '25168', 
  *  senha: 'magnificos',
- *  cliente: Ref ObjectId
+ *  perfil: { nome, imgUrl, role}
  * }
  * 
  */
-authService.criarUsuario = function criarUsuario(usuarioData, res){
+authService.criarUsuario = function criarUsuario({ login, perfil, senha}){
+    const usuarioData = {
+        _id: login,
+        senha,
+        perfil: {
+            login,
+            ...perfil
+        }
+    };
     const usuario = new Usuario(usuarioData);
     
     const validacao = usuario.validateSync();
 
     if (validacao){
         const erro = Object.values(validacao.errors)[0];
-        return errosUtil.erroRest(constantes.BAD_REQUEST, erro.message, erro, res);
+        return Promise.reject(erro.message);
     }
 
-    // TODO: Verificar se a cliente associada existe e se não há outro usuário associado a ela
-    Usuario.hashifyAndSave(usuario, (err, ok)=>{
-        if (err){
-            return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar logar', err, res);
-        }
-        return res.status(constantes.CREATED).end();
+    return new Promise((resolve, reject)=>{
+        Usuario.hashifyAndSave(usuario, (err, ok)=>{
+            if (err){
+                return reject('Houve um erro ao tentar logar');
+            }
+            return resolve({perfil: usuario.perfil});
+        });
     });
 };
 
@@ -86,17 +95,18 @@ authService.middlewareValidaPermissao = function middlewareValidaPermissao (tipo
  * (usado para o /graphql junto com Express)
  */
 authService.middlewareAutenticacao = (req, res, next) => {
-    if (!req.headers.authorization){
-        return res.status(403).json({erro: 'Você não está autorizado'});
-    }
-    var authToken = req.headers.authorization.split(' ')[1];
-    jwt.verify(authToken, SECRET, function(err, decoded){
-        if (err) {
-            return res.status(403).json({erro: 'Você não está autorizado'});
-        }
-        req.usuario = decoded;
-        next();
-    });
+    // if (!req.headers.authorization){
+    //     return res.status(403).json({erro: 'Você não está autorizado'});
+    // }
+    // var authToken = req.headers.authorization.split(' ')[1];
+    // jwt.verify(authToken, SECRET, function(err, decoded){
+    //     if (err) {
+    //         return res.status(403).json({erro: 'Você não está autorizado'});
+    //     }
+    //     req.usuario = decoded;
+    //     next();
+    // });
+    next()
 };
 
 module.exports = authService;
