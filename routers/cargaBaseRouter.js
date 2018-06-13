@@ -1,6 +1,5 @@
 const express = require('express');
 const authService = require('../services/authService');
-
 const cargaBaseRouter = express.Router();
 
 cargaBaseRouter.get('/primeiros-usuarios', (req, res) => {
