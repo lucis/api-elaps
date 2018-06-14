@@ -29,8 +29,8 @@ authService.login = function login(loginData, res){
             if (!isMatch){
                 return errosUtil.erroRest(constantes.BAD_REQUEST, 'Usuário ou senha incorretos', res);
             }
-            const { _id, perfil } = usuarioBD;
-            jwt.sign({ login: _id, perfil}, SECRET, {algorithm: constantes.HS256}, (err, token) => {
+            const { perfil } = usuarioBD;
+            jwt.sign(perfil, SECRET, {algorithm: constantes.HS256}, (err, token) => {
                 if (err){
                     return errosUtil.erroRest(constantes.INTERNAL_SERVER_ERROR, 'Houve um erro ao tentar logar', err, res);
                 }
