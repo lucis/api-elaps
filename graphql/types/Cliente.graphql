@@ -9,7 +9,7 @@ type Cliente {
     cpf: String
     rg: String
     email: String
-    telefones: Telefones
+    telefone: Telefones
     referencia: String
     avatar: String
     veiculos: [Veiculo]
@@ -53,7 +53,7 @@ input ClienteInput {
     cpf: String
     rg: String
     email: String
-    telefones: TelefonesInput
+    telefone: TelefonesInput
     referencia: String
     avatar: String
 }
