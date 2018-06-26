@@ -5,31 +5,31 @@ const authService = require('../services/authService');
 const clientesService = require('../services/clientesService');
 const cargaBaseRouter = express.Router();
 
-// cargaBaseRouter.get('/primeiros-usuarios', (req, res) => {
-//     const luciano = {
-//         login: 'luciano', 
-//         senha: 'luciano', 
-//         perfil: {
-//             nome: 'Luciano Júnior', 
-//             role: 'admin'
-//         }
-//     };
+cargaBaseRouter.get('/primeiros-usuarios', (req, res) => {
+    const luciano = {
+        login: 'luciano', 
+        senha: 'luciano', 
+        perfil: {
+            nome: 'Luciano Júnior', 
+            role: 'admin'
+        }
+    };
 
-//     const silvania = {
-//         login: 'silvania', 
-//         senha: 'silvania', 
-//         perfil: {
-//             nome: 'Silvania Rosemere', 
-//             role: 'user'
-//         }
-//     };
-//     Promise.all([
-//         authService.criarUsuario(luciano),
-//         authService.criarUsuario(silvania)
-//     ]).then(()=>{
-//         res.send('ok');
-//     });
-// });
+    const silvania = {
+        login: 'silvania', 
+        senha: 'silvania', 
+        perfil: {
+            nome: 'Silvania Rosemere', 
+            role: 'user'
+        }
+    };
+    Promise.all([
+        authService.criarUsuario(luciano),
+        authService.criarUsuario(silvania)
+    ]).then(()=>{
+        res.send('ok');
+    });
+});
 
 cargaBaseRouter.get('/mock-clientes', (req, res) => {
     const enderecos = [{
@@ -69,7 +69,7 @@ cargaBaseRouter.get('/mock-clientes', (req, res) => {
         novoCliente.nome = nomes[_.random(nomes.length - 1)];
         novoCliente.endereco = enderecos[_.random(enderecos.length - 1)];
         novoCliente.dNasc = moment('20/05/1998', 'DD/MM/YYYY').unix();
-        novoCliente.cpf = _.random(100, 999) + '.' + _.random(100, 999) + ' .914-77';
+        novoCliente.cpf = _.random(100, 999) + '.' + _.random(100, 999) + '.914-77';
         novoCliente.rg = '3.442.659';
         novoCliente.email = 'teste@lucianoautopecas.com';
         novoCliente.telefones = telefones[_.random(enderecos.length - 1)]
