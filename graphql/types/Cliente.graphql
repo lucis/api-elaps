@@ -4,12 +4,14 @@
 type Cliente {
     id: String
     nome: String
-    dataDeNascimento: String
+    dNasc: String
     endereco: Endereco
     cpf: String
+    cnpj: String
+    pessoaFisica: Boolean
     rg: String
     email: String
-    telefone: Telefones
+    telefones: Telefones
     referencia: String
     avatar: String
     veiculos: [Veiculo]
@@ -48,12 +50,14 @@ input EnderecoInput {
 
 input ClienteInput {
     nome: String
-    dataDeNascimento: String
+    dNasc: String
     endereco: EnderecoInput
     cpf: String
+    cnpj: String
+    pessoaFisica: Boolean
     rg: String
     email: String
-    telefone: TelefonesInput
+    telefones: TelefonesInput
     referencia: String
     avatar: String
 }

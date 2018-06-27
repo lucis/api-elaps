@@ -61,7 +61,6 @@ cargaBaseRouter.get('/mock-clientes', (req, res) => {
     const nomes = ['Lorem ipsum dolor sit', 'Luciano de Oliveira', 'Praesent eu enim', 'Sebastião Donato', 'Ricardo Vieira Coutinho', 'Vidal de Negreiros', 'Joaquim Maria dos Santos Filho de Nem da Feira', 'Ana Maria', 'Menino Neymar dos Santos Júnior'];
     const telefones = [{principal: '(83) 92101-2101', alternativo: '(81) 3324-2323'}, {principal: '(83) 3335-1678'}];
 
-    const cpfs = []
     const promises = [];
 
     for (let i = 0; i < 21; i++){
@@ -70,6 +69,8 @@ cargaBaseRouter.get('/mock-clientes', (req, res) => {
         novoCliente.endereco = enderecos[_.random(enderecos.length - 1)];
         novoCliente.dNasc = moment('20/05/1998', 'DD/MM/YYYY').unix();
         novoCliente.cpf = _.random(100, 999) + '.' + _.random(100, 999) + '.914-77';
+        novoCliente.cnpj = '00.' + _.random(100, 999) + '.' + _.random(100, 999) + '/0001-77';
+        novoCliente.pessoaFisica = _.random(1, 3) >= 2;
         novoCliente.rg = '3.442.659';
         novoCliente.email = 'teste@lucianoautopecas.com';
         novoCliente.telefones = telefones[_.random(enderecos.length - 1)]
