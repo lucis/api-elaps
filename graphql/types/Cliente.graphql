@@ -50,7 +50,7 @@ input EnderecoInput {
 
 input ClienteInput {
     nome: String
-    dNasc: Number
+    dNasc: Int
     endereco: EnderecoInput
     cpf: String
     cnpj: String
